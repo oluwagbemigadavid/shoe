@@ -125,7 +125,45 @@ body {
             }
         }
         &__mid {
-            background: green
+            .product {
+                margin-top: 30%;
+                max-width: 523px;
+                padding: 0 40px;
+                &__text {
+                    & > *{
+                        font-size: 21px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        opacity: 0.4;
+                    }
+                    h1{
+                        font-size: 62px;
+                        font-style: normal;
+                        font-weight: 100;
+                        opacity: 1;
+                        line-height: normal;
+                        letter-spacing: -1.24px;
+                        sup {
+                            font-size: 22px;
+                            letter-spacing: -0.44px;
+                        }
+                    }
+                }
+                &__cta {
+                    display: flex;
+                    align-items: center;
+                    button {
+                        border: none;
+                        outline: none;
+                        background: none;
+                        display: flex;
+                        align-items: center;
+                        padding: 24px 32px;
+                    }
+                }
+            }
+            
         }
         &__right {
             margin-top: 200px;

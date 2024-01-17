@@ -1,5 +1,5 @@
 
-import { Search, ShoppingBasket, UserRound } from 'lucide-react';
+import { Search, ShoppingBasket, UserRound, PlayCircle } from 'lucide-react';
 import Mini from './components/Mini/Mini';
 import { product } from './data';
 import { useEffect, useState } from 'react';
@@ -73,7 +73,21 @@ function App() {
                 <h5>Scroll down</h5>
               </div>
               </div>
-            <div className="hero__container__contents__mid">baba</div>
+
+            <div className="hero__container__contents__mid">
+              <div className="product">
+                <div className="product__text">
+                  <h5>{product[0].shortDesc}</h5>
+                  <h1>{product[0].name}<sup> &reg;</sup></h1>
+                  <p>{product[0].desc}</p>
+                </div>
+                <div className="product__cta">
+                  <button><ShoppingBasket /> Add to cart</button>
+                  <button><PlayCircle /> Watch intro</button>
+                </div>
+              </div>
+            </div>
+
             <div className="hero__container__contents__right">
               <div className="hero__container__contents__right__top">
                 <VerticalText text='team' />
