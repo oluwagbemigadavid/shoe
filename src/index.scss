@@ -19,12 +19,18 @@
 body {
     // font-family: 'Circular Std';
     // font-family: 'Montserrat';
-    // font-family: "Sofia Pro Regular", sans-serif;
+    font-family: "Sofia Pro Regular", sans-serif;
+}
+
+.alt-side img{
+    transform: rotateY(180deg);
 }
 .hero {
+    height: 100vh;
   &__container {
     margin: 0 120px;
     position: relative;
+    height: 100%;
     &__lines {
         display: flex;
         justify-content: space-between;
@@ -63,15 +69,72 @@ body {
     }
     &__contents {
         display: grid;
-        grid-template-columns: 220px auto 100px;
+        grid-template-columns: 220px auto 50px;
         &__left {
             margin-top: 105px;
+            height: 100%;
+            display: grid;
+            align-content: space-between;
+
+            .extra-care {
+                &__text {
+                    display: flex;
+                    font-size: 44px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 100.3%; /* 44.132px */
+                    letter-spacing: -0.44px;
+                    p {
+                        font-weight: 400;
+                        &:first-child {
+                            font-weight: 700;;
+                            background: #000;
+                            color: #fff;
+                        }
+                    }
+                }
+                &__learn {
+                    margin-top: 40px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    span {
+                        width: 48px;
+                        height: 1px;
+                        background: #000;
+                    };
+                }
+                h5 {
+                    margin-top: 120px;
+                }
+            }
         }
         &__mid {
             background: green
         }
         &__right {
-            background: blue
+            margin-top: 105px;
+            display: grid;
+            align-content: space-between;
+            justify-items: flex-end;
+            height: 100%;
+
+            &__bottom {
+                display: grid;
+                gap: 32px;
+                padding-bottom: 5px;
+                a {
+                    text-decoration: none;
+                    text-transform: none;
+                    transform: rotate(-90deg);
+                    transition: transform .5s linear;
+                    color: inherit;
+                    &:hover  {
+                        transform: rotate(0deg);
+                        transition: transform .5s linear;
+                    }
+                }
+            }
         }
     }
   }
