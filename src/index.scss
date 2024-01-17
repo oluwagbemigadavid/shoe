@@ -29,8 +29,9 @@ body {
         position: absolute;
         width: 100%;
         top: 0;
+        z-index: -1;
         & > * {
-            background: #000;
+            background: rgba(#000, 5);
             width: 1px;
             height: 100vh;
             &:first-child, &:last-child {
@@ -56,6 +57,18 @@ body {
             display: flex;
             justify-content: flex-end;
             gap: 24px;
+        }
+    }
+    &__contents {
+        display: grid;
+        grid-template-columns: 220px auto 100px;
+        &__left {
+        }
+        &__mid {
+            background: green
+        }
+        &__right {
+            background: blue
         }
     }
   }
