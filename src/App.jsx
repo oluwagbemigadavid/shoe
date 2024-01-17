@@ -5,7 +5,7 @@ function App() {
     <div>
       <div className="hero">
         <div className="hero__container">
-          
+          Testing font face
         </div> 
       </div>
     </div>

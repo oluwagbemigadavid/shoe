@@ -1,6 +1,16 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @font-face {
-    font-family: 'MyFont';
-    src: local('MyFont'), url(./fonts/MyFont.woff) format('woff');
-    /* other formats include: 'woff2', 'truetype, 'opentype',
-                              'embedded-opentype', and 'svg' */
-  }
+    font-family: 'Circular Std';
+    src: local('Circular Std Book'), url('./assets/Circular\ Std\ Book.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Sofia Pro Regular';
+    src: local('Sofia Pro Regular'), url('./assets/Sofia\ Pro\ Regular.woff2') format('woff2');
+}
+
+body {
+    // font-family: 'Circular Std';
+    // font-family: 'Montserrat';
+    // font-family: "Sofia Pro Regular", sans-serif;
+}
