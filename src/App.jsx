@@ -1,7 +1,12 @@
 
 import { Search, ShoppingBasket, UserRound } from 'lucide-react';
 import Mini from './components/Mini/Mini';
+import { product } from './data';
+import { useState } from 'react';
 function App() {
+
+  const [currentView, setCurrentView] = useState(product[0]?.src.length || 0)
+
   return (
     <div>
       <div className="hero">
@@ -26,7 +31,7 @@ function App() {
           </section>
 
           <section className="hero__container__contents">
-            <div className="hero__container__contents__left"><Mini /></div>
+            <div className="hero__container__contents__left"><Mini item={product[0]?.src} currentView={currentView} /></div>
             <div className="hero__container__contents__mid">baba</div>
             <div className="hero__container__contents__right">saba</div>
           </section>

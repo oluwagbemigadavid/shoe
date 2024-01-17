@@ -8,6 +8,8 @@
     font-family: 'Sofia Pro Regular';
     src: local('Sofia Pro Regular'), url('./assets/Sofia\ Pro\ Regular.woff2') format('woff2');
 }
+
+@import './components/Mini/mini';
 * {
     margin: 0;
     padding: 0;
@@ -63,6 +65,7 @@ body {
         display: grid;
         grid-template-columns: 220px auto 100px;
         &__left {
+            margin-top: 105px;
         }
         &__mid {
             background: green
