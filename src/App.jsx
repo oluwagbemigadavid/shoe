@@ -2,14 +2,36 @@
 import { Search, ShoppingBasket, UserRound } from 'lucide-react';
 import Mini from './components/Mini/Mini';
 import { product } from './data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+
+const VerticalText = ({ text, onClick }) => {
+  return (
+    <div className="vertical-text" onClick={() => onClick()}>
+      {text.split('').reverse().map((letter, index) => (
+        <p key={index}>{letter}</p>
+      ))}
+    </div>
+  );
+};
+
 function App() {
 
   const [currentView, setCurrentView] = useState(0)
 
+
   const changeView = (val) => {
     setCurrentView(val)
   }
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentView((prevView) => (prevView === product[0].src.length - 1 ? 0 : prevView + 1));
+      console.log(currentView)
+    }, 10000);
+    return () => clearInterval(intervalId);
+  }, [currentView]);
+
 
   return (
     <div>
@@ -53,7 +75,11 @@ function App() {
               </div>
             <div className="hero__container__contents__mid">baba</div>
             <div className="hero__container__contents__right">
-              <div className="hero__container__contents__right__top">top</div>
+              <div className="hero__container__contents__right__top">
+                <VerticalText text='team' />
+                <VerticalText text='packaging' />
+                <VerticalText text='manufacturing' />
+              </div>
               <div className="hero__container__contents__right__bottom">
                 <a href="">in</a>
                 <a href="">tw</a>

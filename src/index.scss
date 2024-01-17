@@ -25,6 +25,17 @@ body {
 .alt-side img{
     transform: rotateY(180deg);
 }
+
+.vertical-text {
+    p {
+        transform: rotate(-90deg);
+        margin-top: -10px;
+        text-align: center;
+    }
+  }
+  
+
+
 .hero {
     height: 100vh;
   &__container {
@@ -70,11 +81,15 @@ body {
     &__contents {
         display: grid;
         grid-template-columns: 220px auto 50px;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        width: 100%;
         &__left {
-            margin-top: 105px;
-            height: 100%;
+            margin-top: 200px;
             display: grid;
             align-content: space-between;
+            padding-bottom: 15px;
 
             .extra-care {
                 &__text {
@@ -113,11 +128,15 @@ body {
             background: green
         }
         &__right {
-            margin-top: 105px;
+            margin-top: 200px;
             display: grid;
             align-content: space-between;
             justify-items: flex-end;
-            height: 100%;
+            padding-bottom: 15px;
+            &__top {
+                display: grid;
+                gap: 32px;
+            }
 
             &__bottom {
                 display: grid;
@@ -129,9 +148,13 @@ body {
                     transform: rotate(-90deg);
                     transition: transform .5s linear;
                     color: inherit;
+                    font-family: 'Circular Std';
                     &:hover  {
                         transform: rotate(0deg);
                         transition: transform .5s linear;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 400;
                     }
                 }
             }
