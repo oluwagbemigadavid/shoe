@@ -63,6 +63,7 @@ body {
     position: relative;
     height: 25%;
     position: sticky;
+    overflow-x: hidden;
     top: 0;
     &__lines {
         display: flex;
@@ -150,7 +151,6 @@ body {
             }
         }
         &__mid {
-            //overflow: hidden;
             position: relative;
             
             .carousel {
@@ -167,7 +167,7 @@ body {
                     justify-content: flex-end;
                     padding-right: 180px;
                     .image {
-                        width: 1000px;
+                        width: Min(1000px, 100%);
                     }
                 }
             }
@@ -198,7 +198,7 @@ body {
                         opacity: 1;
                         line-height: normal;
                         letter-spacing: -1.24px;
-                        animation: appear 1.5s ease-in-out;
+                        animation: appear 1s ease-in-out;
                         transform-origin: 0% 50%;
                         sup {
                             font-size: 22px;

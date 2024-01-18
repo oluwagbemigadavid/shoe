@@ -4,6 +4,7 @@ import { Search, ShoppingBasket, UserRound, PlayCircle } from 'lucide-react';
 import Mini from './components/Mini/Mini';
 import { product } from './data';
 import { useEffect, useState, Suspense, useRef, useLayoutEffect } from 'react';
+import SplitType from 'split-type'
 
 
 const VerticalText = ({ text, onClick }) => {
@@ -26,6 +27,7 @@ function App() {
   const [currentView, setCurrentView] = useState(0)
   const carousel = useRef(null)
   const textRef = useRef(null)
+  const [currentPercentage, setCurrentPercentage] = useState(0)
 
 
   const changeView = (val) => {
@@ -38,13 +40,19 @@ function App() {
     }, 10000);
     return () => clearInterval(intervalId);
   }, [currentView]);
-
+  
   useEffect(() => {
-    console.log(textRef.current.children)
-  }, [])
+   console.log(textRef.current.innerHTML)
+   const splitTypes = document.querySelectorAll('.product-desc')
+   splitTypes.forEach((char, i) => {
+    const text = new SplitType(char, {types: 'chars, words'})
+    console.log(text)
+   })
+  }, [product])
   
 
 
+  console.log(currentPercentage)
   useLayoutEffect(() => {
     if(window.innerWidth > 700) {
         const section = document.querySelector('.hero__container')
@@ -54,6 +62,7 @@ function App() {
           const scrollSection = section?.querySelector('.carousel');
           let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100;
           const val = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage;
+          setCurrentPercentage(val)
           scrollSection.style.transform =`translate3d(${-(val)}vw, 0, 0)`
         }
         window.addEventListener('scroll', Transform);
@@ -113,7 +122,7 @@ function App() {
                 <div className="product__text">
                   <h5>{product[0].shortDesc}</h5>
                   <h1>{product[0].name}<sup> &reg;</sup></h1>
-                  <p ref={textRef}>{product[0].desc}</p>
+                  <p ref={textRef} className='product-desc'>{product[0].desc}</p>
                 </div>
                 <div className="product__cta">
                   <button><ShoppingBasket /> Add to cart</button>
