@@ -5,6 +5,7 @@ import Mini from './components/Mini/Mini';
 import { product } from './data';
 import { useEffect, useState, Suspense, useRef, useLayoutEffect } from 'react';
 import SplitType from 'split-type'
+import gsap from 'gsap';
 
 
 const VerticalText = ({ text, onClick }) => {
@@ -42,12 +43,43 @@ function App() {
   }, [currentView]);
   
   useEffect(() => {
-   console.log(textRef.current.innerHTML)
-   const splitTypes = document.querySelectorAll('.product-desc')
-   splitTypes.forEach((char, i) => {
-    const text = new SplitType(char, {types: 'chars, words'})
-    console.log(text)
-   })
+    const splitTypes = document.querySelectorAll('.product-desc')
+    splitTypes.forEach((char, i) => {
+     const text = new SplitType(char, {types: 'chars, words'})
+     
+     gsap.from(text.chars, {
+       scrollTrigger: {
+         trigger: char,
+         start: 'top 100%',
+         end: 'bottom 100%',
+         scrub: false,
+         once: true
+       },
+       stagger: 0.02,
+       opacity: 0,
+       duration: .1,
+       ease: 'power2.out'
+     })
+    })
+
+    const underlay = document.querySelectorAll('.underlay')
+    underlay.forEach((char, i) => {
+     const text = new SplitType(char, {types: 'chars'})
+     
+     gsap.from(text.chars, {
+       scrollTrigger: {
+         trigger: char,
+         start: 'top 100%',
+         end: 'bottom 100%',
+         scrub: false,
+         once: true
+       },
+       stagger: 0.02,
+       width: 0,
+       scale: 0,
+       duration: 3,
+     })
+    })
   }, [product])
   
 
@@ -131,7 +163,7 @@ function App() {
               </div>
 
               <div className="underlay">
-                {product[0].underlay}
+                <p>{product[0].underlay}</p>
               </div>
 
               <div className="carousel variation-1" ref={carousel}>
