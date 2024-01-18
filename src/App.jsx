@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 
 import { Search, ShoppingBasket, UserRound, PlayCircle } from 'lucide-react';
 import Mini from './components/Mini/Mini';
 import { product } from './data';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense, useRef } from 'react';
 
 
 const VerticalText = ({ text, onClick }) => {
@@ -14,10 +15,16 @@ const VerticalText = ({ text, onClick }) => {
     </div>
   );
 };
+const Loading = () => {
+  return (
+    <h1> Loading ....</h1>
+  )
+}
 
 function App() {
 
   const [currentView, setCurrentView] = useState(0)
+  const carousel = useRef(null)
 
 
   const changeView = (val) => {
@@ -27,13 +34,15 @@ function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentView((prevView) => (prevView === product[0].src.length - 1 ? 0 : prevView + 1));
-      console.log(currentView)
     }, 10000);
     return () => clearInterval(intervalId);
   }, [currentView]);
 
 
+
   return (
+    <Suspense fallback={<Loading />}>
+
     <div>
       <div className="hero">
         <div className="hero__container">
@@ -75,6 +84,7 @@ function App() {
               </div>
 
             <div className="hero__container__contents__mid">
+
               <div className="product">
                 <div className="product__text">
                   <h5>{product[0].shortDesc}</h5>
@@ -85,6 +95,20 @@ function App() {
                   <button><ShoppingBasket /> Add to cart</button>
                   <button><PlayCircle /> Watch intro</button>
                 </div>
+              </div>
+
+              <div className="underlay">
+                {product[0].underlay}
+              </div>
+
+              <div className="carousel variation-1" ref={carousel}>
+                {product[0].src.map((src, i) => (
+                  <img src={src.src} alt={`img-${i}`} key={i + '-img'} className={`image img-${src.className}`} />
+                ))}
+              </div>
+
+              <div className="tracker">
+                0{currentView + 1 } / 0{product[0].src.length}
               </div>
             </div>
 
@@ -104,6 +128,7 @@ function App() {
         </div> 
       </div>
     </div>
+    </Suspense>
   )
 }
 

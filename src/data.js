@@ -11,12 +11,12 @@ export const product = [
             {
                 src: top,
                 alt: 'Comfy Maxer Top',
-                className: '',
+                className: 'top',
             },
             {
                 src: side,
                 alt: 'Comfy Maxer Side',
-                className: '',
+                className: 'side',
             },
             {
                 src: side,
@@ -26,7 +26,7 @@ export const product = [
             {
                 src: bottom,
                 alt: 'Comfy Maxer Bottom',
-                className: '',
+                className: 'bottom',
             }
         ],
         underlay: '94'

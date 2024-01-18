@@ -9,6 +9,11 @@
     src: local('Sofia Pro Regular'), url('./assets/Sofia\ Pro\ Regular.woff2') format('woff2');
 }
 
+@font-face {
+    font-family: 'Avenir';
+    src: local('Avenir Black'), url('./assets/Avenir\ Black.woff') format('woff');
+}
+
 @import './components/Mini/mini';
 * {
     margin: 0;
@@ -22,7 +27,7 @@ body {
     font-family: "Sofia Pro Regular", sans-serif;
 }
 
-.alt-side img{
+.img-alt-side, .alt-side{
     transform: rotateY(180deg);
 }
 
@@ -49,12 +54,13 @@ body {
         width: 100%;
         top: 0;
         z-index: -1;
+        opacity: .1;
         & > * {
             background: rgba(#000, 5);
             width: 1px;
             height: 100vh;
             &:first-child, &:last-child {
-                opacity: .2;
+                opacity: 0;
             }
         }
     }
@@ -125,9 +131,35 @@ body {
             }
         }
         &__mid {
+            overflow: hidden;
+            position: relative;
+            
+            .carousel {
+                img {
+                width: 700px;
+                }
+            }
+            .variation-1 {
+                display: flex;
+                width: 400%;
+                position: absolute;
+                bottom: 60px;
+                pointer-events: none;
+                margin-left: -000%;
+                .image {
+                    width: 20%;
+                    margin:  0 0 0 auto;
+                }
+                .img-top {
+                    // transform: rotate(-15deg) translateY(-10%);
+                    transform-origin: 50% 50%;
+                }
+            }
+
             .product {
+                margin-left: 10%;
                 margin-top: 20%;
-                max-width: 523px;
+                max-width: 603px;
                 padding: 0 40px;
                 &__text {
                     & > *{
@@ -153,17 +185,62 @@ body {
                 &__cta {
                     display: flex;
                     align-items: center;
+                    gap: 24px;
+                    margin-top: 40px;
                     button {
                         border: none;
                         outline: none;
                         background: none;
                         display: flex;
+                        gap: 8px;
                         align-items: center;
                         padding: 24px 32px;
-                        background: #000;
+                        background: rgba(#000, 1);
+                        border-radius: 8px;
                         color: #fff;
+                        transition: all .5s linear;
+                        cursor: pointer;
+                        position: relative;
+                        z-index: 0;
+                        &:hover {
+                            background: rgba($color: #000000, $alpha: 0.9);
+                            transform: scale(1.1);
+                            transition: all .5s linear;
+                            z-index: 2;
+                        }
+                        &:last-child {
+                            color: #000;
+                            border: 1px solid #000;
+                            background: rgba($color: #000000, $alpha: 0);
+                            &:hover {
+                                background: rgba($color: #000000, $alpha: 0.2);
+                                transform: scale(1.1);
+                                transition: all .5s linear;
+                            }
+                        }
                     }
                 }
+            }
+
+            .underlay {
+                position: absolute;
+                color: #ECCA7B;
+                font-family: Avenir;
+                font-size: 530px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+                letter-spacing: -8.6px;
+                opacity: 0.2;
+                right: 60px;
+                top: 7%;
+                z-index: -1;
+            }
+
+            .tracker {
+                position: absolute;
+                bottom: 15px;
+                left: 50%;
             }
             
         }
