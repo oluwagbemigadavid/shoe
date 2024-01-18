@@ -25,6 +25,7 @@ function App() {
 
   const [currentView, setCurrentView] = useState(0)
   const carousel = useRef(null)
+  const textRef = useRef(null)
 
 
   const changeView = (val) => {
@@ -38,6 +39,10 @@ function App() {
     return () => clearInterval(intervalId);
   }, [currentView]);
 
+  useEffect(() => {
+    console.log(textRef.current.children)
+  }, [])
+  
 
 
   return (
@@ -89,7 +94,7 @@ function App() {
                 <div className="product__text">
                   <h5>{product[0].shortDesc}</h5>
                   <h1>{product[0].name}<sup> &reg;</sup></h1>
-                  <p>{product[0].desc}</p>
+                  <p ref={textRef}>{product[0].desc}</p>
                 </div>
                 <div className="product__cta">
                   <button><ShoppingBasket /> Add to cart</button>
