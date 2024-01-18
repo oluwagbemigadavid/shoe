@@ -3,7 +3,7 @@
 import { Search, ShoppingBasket, UserRound, PlayCircle } from 'lucide-react';
 import Mini from './components/Mini/Mini';
 import { product } from './data';
-import { useEffect, useState, Suspense, useRef } from 'react';
+import { useEffect, useState, Suspense, useRef, useLayoutEffect } from 'react';
 
 
 const VerticalText = ({ text, onClick }) => {
@@ -44,6 +44,25 @@ function App() {
   }, [])
   
 
+
+  useLayoutEffect(() => {
+    if(window.innerWidth > 700) {
+        const section = document.querySelector('.hero__container')
+    
+        const Transform = () => {
+          const offsetTop = section?.parentElement.offsetTop;
+          const scrollSection = section?.querySelector('.carousel');
+          let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100;
+          const val = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage;
+          scrollSection.style.transform =`translate3d(${-(val)}vw, 0, 0)`
+        }
+        window.addEventListener('scroll', Transform);
+    
+        return () => {
+          window.removeEventListener('scroll', Transform);
+        };
+    }
+  }, []);
 
   return (
     <Suspense fallback={<Loading />}>
@@ -108,7 +127,9 @@ function App() {
 
               <div className="carousel variation-1" ref={carousel}>
                 {product[0].src.map((src, i) => (
-                  <img src={src.src} alt={`img-${i}`} key={i + '-img'} className={`image img-${src.className}`} />
+                  <div className="image-container"  key={i + '-img'} >
+                    <img src={src.src} alt={`img-${i}`} className={`image img-${src.className}`} />
+                  </div>
                 ))}
               </div>
 
