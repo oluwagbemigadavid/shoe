@@ -163,18 +163,16 @@ body {
                 margin-left: -000%;
                 .image-container {
                     width: 100vw;
+                    height: 100vh;
                     display: flex;
                     justify-content: flex-end;
+                    align-items: flex-end;
                     padding-right: 180px;
+                    overflow: hidden;
                     .image {
-                        width: Min(1000px, 100%);
+                        width: Min(900px, 90%);
+                        height: fit-content;
                     }
-                }
-            }
-            .variation-1 {
-                .img-top {
-                    // transform: rotate(-15deg) translateY(-10%);
-                    transform-origin: 50% 50%;
                 }
             }
 
@@ -183,6 +181,8 @@ body {
                 margin-top: 17%;
                 max-width: 603px;
                 padding: 0 40px;
+                position: relative;
+                z-index: 5;
                 &__text {
                     & > *{
                         font-size: 21px;
@@ -275,6 +275,9 @@ body {
                 position: absolute;
                 bottom: 15px;
                 left: 50%;
+                span {
+                    animation: appear .4s linear;
+                }
             }
             
         }

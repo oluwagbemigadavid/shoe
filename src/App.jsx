@@ -6,7 +6,10 @@ import { product } from './data';
 import { useEffect, useState, Suspense, useRef, useLayoutEffect } from 'react';
 import SplitType from 'split-type'
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { doScrolling } from './helpers';
 
+gsap.registerPlugin(ScrollTrigger)
 
 const VerticalText = ({ text, onClick }) => {
   return (
@@ -17,34 +20,32 @@ const VerticalText = ({ text, onClick }) => {
     </div>
   );
 };
-const Loading = () => {
-  return (
-    <h1> Loading ....</h1>
-  )
-}
 
 function App() {
 
   const [currentView, setCurrentView] = useState(0)
   const carousel = useRef(null)
   const textRef = useRef(null)
-  const [currentPercentage, setCurrentPercentage] = useState(0)
 
 
   const changeView = (val) => {
     setCurrentView(val)
+    doScrolling(window.innerHeight * (val), 1000)
   }
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentView((prevView) => (prevView === product[0].src.length - 1 ? 0 : prevView + 1));
-    }, 10000);
-    return () => clearInterval(intervalId);
+    if(currentView !== product[0].src.length - 1) {
+      const intervalId = setInterval(() => {
+        doScrolling(window.innerHeight * (currentView + 1), 1000)
+        setCurrentView((prevView) => (prevView === product[0].src.length - 1 ? 0 : prevView + 1));
+      }, 5000);
+      return () => clearInterval(intervalId);
+    }
   }, [currentView]);
   
   useEffect(() => {
     const splitTypes = document.querySelectorAll('.product-desc')
-    splitTypes.forEach((char, i) => {
+    splitTypes.forEach((char) => {
      const text = new SplitType(char, {types: 'chars, words'})
      
      gsap.from(text.chars, {
@@ -72,21 +73,64 @@ function App() {
          start: 'top 100%',
          end: 'bottom 100%',
          scrub: false,
-         once: true
+         once: true,
        },
        stagger: 0.02,
        width: 0,
        scale: 0,
        duration: 3,
      })
+
+
     })
+
   }, [product])
+  
+  useEffect(() => {
+    const animate = (el, start, end) => {
+      gsap.to(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: `top ${start}%`,
+          end: `top ${end}%`,
+          scrub: 1,
+        },
+        rotate: -45,
+        scale: .5,
+        opacity: 0,
+        y: '-100%',
+      })
+    }
+
+    const elements = [
+      {
+        el: '.img-top',
+        start: 50,
+        end: -30
+      },
+      {
+        el: '.img-side',
+        start: -45,
+        end: -125
+      },
+      {
+        el: '.img-alt-side',
+        start: -145,
+        end: -225
+      },
+    ]
+
+    for( let i = 0; i < elements.length ; i++) {
+      animate(elements[i].el, elements[i].start, elements[i].end)
+    }
+    
+  }, [])
   
 
 
-  console.log(currentPercentage)
   useLayoutEffect(() => {
-    if(window.innerWidth > 700) {
+    window.scrollTo(0, 0);
+    if(window.innerWidth > 100) {
         const section = document.querySelector('.hero__container')
     
         const Transform = () => {
@@ -94,7 +138,6 @@ function App() {
           const scrollSection = section?.querySelector('.carousel');
           let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100;
           const val = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage;
-          setCurrentPercentage(val)
           scrollSection.style.transform =`translate3d(${-(val)}vw, 0, 0)`
         }
         window.addEventListener('scroll', Transform);
@@ -106,8 +149,6 @@ function App() {
   }, []);
 
   return (
-    <Suspense fallback={<Loading />}>
-
     <div>
       <div className="hero">
         <div className="hero__container">
@@ -175,7 +216,7 @@ function App() {
               </div>
 
               <div className="tracker">
-                0{currentView + 1 } / 0{product[0].src.length}
+                0<span key={currentView}>{currentView + 1 }</span> / 0{product[0].src.length}
               </div>
             </div>
 
@@ -194,8 +235,7 @@ function App() {
           </section>
         </div> 
       </div>
-    </div>
-    </Suspense>
+    </div> 
   )
 }
 
