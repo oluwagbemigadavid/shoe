@@ -38,7 +38,7 @@ function App() {
       const intervalId = setInterval(() => {
         doScrolling(window.innerHeight * (currentView + 1), 1000)
         setCurrentView((prevView) => (prevView === product[0].src.length - 1 ? 0 : prevView + 1));
-      }, 5000);
+      }, 10000);
       return () => clearInterval(intervalId);
     }
   }, [currentView]);
@@ -125,11 +125,13 @@ function App() {
     }
     
   }, [])
-  
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setCurrentView(0)
+  }, [])
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
     if(window.innerWidth > 100) {
         const section = document.querySelector('.hero__container')
     
