@@ -335,6 +335,11 @@ body {
                 position: absolute;
                 bottom: 15px;
                 left: 50%;
+                @media screen and (max-width: 750px) {
+                    left: -24px;
+                    width: 100%;
+                    text-align: center;
+                }
                 span {
                     animation: appear .4s linear;
                 }

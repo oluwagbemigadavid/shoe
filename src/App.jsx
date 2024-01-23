@@ -229,9 +229,9 @@ function App() {
                 <VerticalText text='manufacturing' />
               </div>
               <div className="hero__container__contents__right__bottom">
-                <a href="">in</a>
-                <a href="">tw</a>
-                <a href="">fb</a>
+                <a href="https://www.linkedin.com/in/web-scientist/" target='blank'>in</a>
+                <a href="https://github.com/oluwagbemigadavid" target='blank'>gh</a>
+                <a href="https://twitter.com/KoningDavid_I" target='blank'>tw</a>
               </div>
             </div>
           </section>
